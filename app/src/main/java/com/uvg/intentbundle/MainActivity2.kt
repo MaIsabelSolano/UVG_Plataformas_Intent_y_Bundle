@@ -6,13 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main2.*
+import java.util.*
 
 class MainActivity2 : AppCompatActivity() {
 
-    var num1:Int = 0
+    var num1:Float? = 0f
     var numero1:String = ""
-    var num2:Int = 0
+    var num2:Float? = 0f
     var numero2:String = ""
+    var operacion:Int = 0
+    var resultado:Float = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,30 +24,52 @@ class MainActivity2 : AppCompatActivity() {
         val bundle= intent.extras
 
         if (bundle!=null){
-            val texto = bundle.getString("valor")
-            txtTexto.text = texto
-
-            val valor2 = bundle.getString("valor2")
-            Toast.makeText(this,valor2,Toast.LENGTH_SHORT).show()
-
-            val valor3 = bundle.getString("valor3","no value")
-            Toast.makeText(this, valor3, Toast.LENGTH_SHORT).show()
-
-
+            operacion = bundle.getInt("tipoOperacion")
         }
+
+        numero1 = ETnumero1.toString() //obtener el numero del usuario
+        numero2 = ETnumero2.toString() //obtener el numero del usuario
+
+        conversionStringaNumero() //se convierten a numeros
+        operacion(operacion,num1,num2)
 
         btnRegresar.setOnClickListener{
             val intent: Intent = Intent() //construtor vacio
-            intent.putExtra("resultado","valor desde pantalla")
+            intent.putExtra("resultado",resultado.toString())
             setResult(RESULT_OK,intent)
             finish()
         }
-
-        numero1 = ETnumero1.toString()
-        numero2 = ETnumero2.toString()
     }
 
-    fun conversionStringaNumero(palabra:String){
+    fun conversionStringaNumero(){
+        try {
+            num1 = numero1.toFloat()
+            num2 = numero2.toFloat()
+        }
+        catch (ime:InputMismatchException){return}
+    }
+
+    fun operacion(tipo:Int, nume1:Float?, nume2:Float?){
+        if (nume1 != null){
+            if (nume2 != null) {
+                if (tipo == 1) {
+                    //se realiza una suma
+                    resultado = nume1 + nume2
+                } else if (tipo == 2) {
+                    //se realiza una resta
+                    resultado = nume1 - nume2
+                } else if (tipo == 3) {
+                    resultado = nume1*nume2
+                    //se realiza una multiplicacion
+                } else if (tipo == 4) {
+                    resultado = nume1/nume2
+                    //se realiza una division
+                }
+            }
+        }
+        else {
+            resultado = 0f
+        }
 
     }
 }

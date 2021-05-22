@@ -13,17 +13,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnOpen.setOnClickListener{
+        btnSuma.setOnClickListener{
             val intent: Intent = Intent(this,MainActivity2::class.java)
-            intent.putExtra("valor","Ingrese 2 numeros")
-            intent.putExtra("valor2","Prueba")
-            //startActivity(intent)
-            //finish()
-
+            intent.putExtra("tipoOperacion",1)
             startActivityForResult(intent,1)
         }
-
-
+        btnResta.setOnClickListener{
+            val intent: Intent = Intent(this,MainActivity2::class.java)
+            intent.putExtra("tipoOperacion",2)
+            startActivityForResult(intent,1)
+        }
+        btnMultiplicacion.setOnClickListener{
+            val intent: Intent = Intent(this,MainActivity2::class.java)
+            intent.putExtra("tipoOperacion",3)
+            startActivityForResult(intent,1)
+        }
+        btnDivision.setOnClickListener{
+            val intent: Intent = Intent(this,MainActivity2::class.java)
+            intent.putExtra("tipoOperacion",4)
+            startActivityForResult(intent,1)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -36,7 +45,8 @@ class MainActivity : AppCompatActivity() {
                 val bundle = data?.extras
                 if (bundle != null){
                     val resultado = bundle.getString("resultado")
-                    Toast.makeText(this,resultado,Toast.LENGTH_SHORT).show()
+                    txtResultado.text = resultado
+                    //Toast.makeText(this,resultado,Toast.LENGTH_SHORT).show()
                 }
             }
         }
