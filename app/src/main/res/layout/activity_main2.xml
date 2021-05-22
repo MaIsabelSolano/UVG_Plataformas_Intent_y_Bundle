@@ -17,11 +17,13 @@
 
     <EditText
         android:id="@+id/ETnumero1"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <EditText
         android:id="@+id/ETnumero2"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

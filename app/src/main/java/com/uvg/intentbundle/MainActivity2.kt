@@ -27,17 +27,26 @@ class MainActivity2 : AppCompatActivity() {
             operacion = bundle.getInt("tipoOperacion")
         }
 
-        numero1 = ETnumero1.toString() //obtener el numero del usuario
-        numero2 = ETnumero2.toString() //obtener el numero del usuario
-
-        conversionStringaNumero() //se convierten a numeros
-        operacion(operacion,num1,num2)
 
         btnRegresar.setOnClickListener{
-            val intent: Intent = Intent() //construtor vacio
-            intent.putExtra("resultado",resultado.toString())
-            setResult(RESULT_OK,intent)
-            finish()
+            numero1 = ETnumero1.toString() //obtener el numero del usuario
+            numero2 = ETnumero2.toString() //obtener el numero del usuario
+
+            conversionStringaNumero() //se convierten a numeros
+            operacion(operacion,num1,num2)
+
+            if (resultado !=null) {
+
+                val intent: Intent = Intent() //construtor vacio
+                intent.putExtra("resultado", resultado.toString())
+                setResult(RESULT_OK, intent)
+                finish()
+            }
+            else {
+                val intent: Intent = Intent()
+                setResult(RESULT_CANCELED,intent)
+                finish()
+            }
         }
     }
 

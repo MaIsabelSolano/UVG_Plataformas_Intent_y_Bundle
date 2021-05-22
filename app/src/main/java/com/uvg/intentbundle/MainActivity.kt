@@ -50,5 +50,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        if (resultCode == Activity.RESULT_CANCELED){
+            txtResultado.text = "Hubo un error"
+        }
     }
 }
