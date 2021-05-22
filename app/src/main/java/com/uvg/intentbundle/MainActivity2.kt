@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main2.*
 import java.util.*
@@ -29,8 +31,17 @@ class MainActivity2 : AppCompatActivity() {
 
 
         btnRegresar.setOnClickListener{
-            numero1 = ETnumero1.toString() //obtener el numero del usuario
-            numero2 = ETnumero2.toString() //obtener el numero del usuario
+            numero1 = ETnumero1.text.toString() //obtener el numero del usuario
+            numero2 = ETnumero2.text.toString() //obtener el numero del usuario
+
+            /*
+            ETnumero1.setOnEditorActionListener{
+                EditorInfo.IME_ACTION_SEND -> {
+                numero1 = ETnumero1.text.toString()
+            }
+            }
+
+             */
 
             conversionStringaNumero() //se convierten a numeros
             operacion(operacion,num1,num2)
@@ -53,7 +64,9 @@ class MainActivity2 : AppCompatActivity() {
     fun conversionStringaNumero(){
         try {
             num1 = numero1.toFloat()
+            System.out.println(num1!!)
             num2 = numero2.toFloat()
+            System.out.println(num2!!)
         }
         catch (ime:InputMismatchException){return}
     }
